@@ -1,18 +1,37 @@
 <template>
-  <router-view></router-view>
-  <div class="container">
+  <div>
     <h2>To-do List</h2>
-    <input class="form-control" type="text" v-model="searchText" placeholder="Search" @keyup.enter="searchTodo" />
-    <hr />
-    <TodoSimpleForm @add-todo="addTodo" />
-    <div style="color : red">{{ error }}</div>
-    <div v-if="!todos.length">There's no todo added</div>
-    <TodoList :todos="todos" @toggle-todo="toggleTodo" @delete-todo="deleteTodo" />
+    <input 
+      class="form-control" 
+      type="text" 
+      v-model="searchText" 
+      placeholder="Search" 
+      @keyup.enter="searchTodo" />
+      <hr />
+      <TodoSimpleForm 
+      @add-todo="addTodo" />
+      <div 
+      style="color : red">
+        {{ error }}
+      </div>
+      <div 
+      v-if="!todos.length">
+      There's no todo added
+    </div>
+    <TodoList 
+      :todos="todos" 
+      @toggle-todo="toggleTodo" 
+      @delete-todo="deleteTodo" />
     <hr />
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item" v-if="currentPage !==1">
-          <a style="cursor: pointer" class="page-link" @click="getTodos(currentPage -1)">Previous</a>
+          <a 
+            style="cursor: pointer" 
+            class="page-link" 
+            @click="getTodos(currentPage -1)">
+              Previous
+          </a>
         </li>
         <li
           class="page-item"
@@ -20,10 +39,21 @@
           v-for="page in numberOfPages"
           :key="page"
         >
-          <a style="cursor: pointer" class="page-link" @click="getTodos(page)">{{ page }}</a>
+          <a 
+            style="cursor: pointer" 
+            class="page-link" 
+            @click="getTodos(page)">
+              {{ page }}
+          </a>
         </li>
-        <li class="page-item" v-if="numberOfPages !== currentPage">
-          <a style="cursor: pointer" class="page-link" @click="getTodos(currentPage + 1)">Next</a>
+        <li 
+          class="page-item" 
+          v-if="numberOfPages !== currentPage">
+          <a 
+            style="cursor: pointer" 
+            class="page-link" 
+            @click="getTodos(currentPage + 1)">Next
+          </a>
         </li>
       </ul>
     </nav>
@@ -86,14 +116,14 @@ export default {
       }
     };
 
-    const toggleTodo = async (index) => {
+    const toggleTodo = async (index, checked) => {
       error.value = "";
       const id = todos.value[index].id;
       try {
         await axios.patch("http://localhost:3000/todos/" + id, {
-          completed: !todos.value[index].completed,
+          completed: checked
         });
-        todos.value[index].completed = !todos.value[index].completed;
+        todos.value[index].completed = checked;
       } catch (err) {
         console.log(err);
         error.value = "Something went wrong.";

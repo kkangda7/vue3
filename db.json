@@ -42,12 +42,12 @@
     },
     {
       "subject": "php",
-      "completed": false,
+      "completed": true,
       "id": 13
     },
     {
       "subject": "ddd",
-      "completed": true,
+      "completed": false,
       "id": 15
     },
     {
@@ -57,23 +57,13 @@
     },
     {
       "subject": "buta",
-      "completed": false,
+      "completed": true,
       "id": 17
     },
     {
-      "subject": "add1",
+      "subject": "add2",
       "completed": false,
       "id": 18
-    },
-    {
-      "subject": "buta11",
-      "completed": false,
-      "id": 19
-    },
-    {
-      "subject": "newtodo",
-      "completed": false,
-      "id": 20
     }
   ]
 }
